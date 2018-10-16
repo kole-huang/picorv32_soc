@@ -1,0 +1,3 @@
+stop -create -time 20000000ns -relative
+run
+exit

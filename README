@@ -1,0 +1,51 @@
+This package is picorv32 soc, including HW and SW parts
+HW parts
+1. cliffordwolf's picorv32_wb with some modifications
+  (1) add read strobe signal, for WB 8-bit device access (opencore's uart16550)
+  (2) add timer reload mechanism, timer will automatically reload
+  (3) add global irq disable/enable mechanism for RTOS porting (a new picorv32_ctlirq_insn)
+2. wb_intercon, Wishbone bus matrix
+3. opencore's uart16550
+4. wishbone SRAM
+5. Simulation environment, currently only support Cadence ncsim
+6. FPGA
+  Support the following FPGAs
+  (1) BeMicro CV-A9 (already phased-out on www.arrow.com)
+  (2) Intel Stratix V Advanced Systems Development Kit Special Edition (with 2x 5sgxeabn2f45c2n chip)
+  (3) FPGA 530 (https://fpgatry.world.taobao.com)
+  (4) Xilinx xc7k325t (https://item.taobao.com/item.html?id=556680465917)
+
+SW parts
+1. boot code (boot from SRAM)
+2. FreeRTOS porting (boot from SRAM)
+
+SW build
+cd picorv32_soc/sw/tools; make
+cd picorv32_soc/sw/SRAM_BOOT; make depend; make clean; make
+cd picorv32_soc/sw/FreeRTOSV6.1.0.picorv32; make clean; make
+
+Simulation build
+cd picorv32_soc/hw/sim/ncsim; cp -f ../../../sw/SRAM_BOOT/sram_boot.hex; make clean; make run_ncsim
+cd picorv32_soc/hw/sim/ncsim; cp -f ../../../sw/FreeRTOSV6.1.0.picorv32/sram_boot.hex; make clean; make run_ncsim
+
+FPGA build
+1.
+  cd picorv32_soc/hw/fpga/bemicro_cva9
+  cp -f ../../../sw/SRAM_BOOT/sram_boot.mif or cp -f ../../../sw/FreeRTOSV6.1.0.picorv32/sram_boot.mif
+  make clean; make
+2.
+  cd picorv32_soc/hw/fpga/fpga1_5sgxeabn2f45c2n
+  cp -f ../../../sw/SRAM_BOOT/sram_boot.mif or cp -f ../../../sw/FreeRTOSV6.1.0.picorv32/sram_boot.mif
+  make clean; make
+3.
+  cd picorv32_soc/hw/fpga/fpga2_5sgxeabn2f45c2n
+  cp -f ../../../sw/SRAM_BOOT/sram_boot.mif or cp -f ../../../sw/FreeRTOSV6.1.0.picorv32/sram_boot.mif
+  make clean; make
+4.
+  cd picorv32_soc/hw/fpga/fpga530
+  cp -f ../../../sw/SRAM_BOOT/sram_boot.mif or cp -f ../../../sw/FreeRTOSV6.1.0.picorv32/sram_boot.mif
+  make clean; make
+5.
+  cd picorv32_soc/hw/fpga/xc7k325t
+  cp -f ../../../sw/SRAM_BOOT/sram_boot.mif or cp -f ../../../sw/FreeRTOSV6.1.0.picorv32/sram_boot.mif
+  ./syn.sh
