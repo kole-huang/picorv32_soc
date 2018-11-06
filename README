@@ -16,8 +16,9 @@ HW parts
   (4) Xilinx xc7k325t (https://item.taobao.com/item.html?id=556680465917)
 
 SW parts
-1. boot code (boot from SRAM)
-2. FreeRTOS porting (boot from SRAM)
+1. Toolchain, please refer to https://github.com/cliffordwolf/picorv32
+2. boot code (boot from SRAM)
+3. FreeRTOS porting (boot from SRAM)
 
 SW build
 cd picorv32_soc/sw/tools; make
@@ -31,21 +32,21 @@ cd picorv32_soc/hw/sim/ncsim; cp -f ../../../sw/FreeRTOSV6.1.0.picorv32/sram_boo
 FPGA build
 1.
   cd picorv32_soc/hw/fpga/bemicro_cva9
-  cp -f ../../../sw/SRAM_BOOT/sram_boot.mif or cp -f ../../../sw/FreeRTOSV6.1.0.picorv32/sram_boot.mif
+  cp -f ../../../sw/SRAM_BOOT/sram_boot.mif . or cp -f ../../../sw/FreeRTOSV6.1.0.picorv32/sram_boot.mif .
   make clean; make
 2.
   cd picorv32_soc/hw/fpga/fpga1_5sgxeabn2f45c2n
-  cp -f ../../../sw/SRAM_BOOT/sram_boot.mif or cp -f ../../../sw/FreeRTOSV6.1.0.picorv32/sram_boot.mif
+  cp -f ../../../sw/SRAM_BOOT/sram_boot.mif . or cp -f ../../../sw/FreeRTOSV6.1.0.picorv32/sram_boot.mif .
   make clean; make
 3.
   cd picorv32_soc/hw/fpga/fpga2_5sgxeabn2f45c2n
-  cp -f ../../../sw/SRAM_BOOT/sram_boot.mif or cp -f ../../../sw/FreeRTOSV6.1.0.picorv32/sram_boot.mif
+  cp -f ../../../sw/SRAM_BOOT/sram_boot.mif . or cp -f ../../../sw/FreeRTOSV6.1.0.picorv32/sram_boot.mif .
   make clean; make
 4.
   cd picorv32_soc/hw/fpga/fpga530
-  cp -f ../../../sw/SRAM_BOOT/sram_boot.mif or cp -f ../../../sw/FreeRTOSV6.1.0.picorv32/sram_boot.mif
+  cp -f ../../../sw/SRAM_BOOT/sram_boot.mif . or cp -f ../../../sw/FreeRTOSV6.1.0.picorv32/sram_boot.mif .
   make clean; make
 5.
   cd picorv32_soc/hw/fpga/xc7k325t
-  cp -f ../../../sw/SRAM_BOOT/sram_boot.mif or cp -f ../../../sw/FreeRTOSV6.1.0.picorv32/sram_boot.mif
+  cp -f ../../../sw/SRAM_BOOT/sram_boot.hex . or cp -f ../../../sw/FreeRTOSV6.1.0.picorv32/sram_boot.hex .
   ./syn.sh
